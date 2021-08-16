@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+{% block title %}
+<title> This is Edit page </title>
+{% endblock title %}
+
+
+{% block content %}
+<div class= "container">
+<br>
+    {% if task_obj.manage == request.user %}
+    <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col my-3">
+                    <input type="text" class="form-control" name="task" placeholder="Enter Task" aria-label="Task">
+                </div>
+                <div class="col-3 my-3">
+                    <button type="submit" class="btn btn-primary"> Submit </button>
+                </div>
+            </div>
+        </form>
+    {% else %}
+        <p> Access denied </p>
+    {% endif %}
+        <br>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% load static %}
+ {% block title %}
+        <title>  This is Home page </title>
+ {% endblock title %}
+<style>
+.container {
+    background-color: red;
+}
+
+</style>
+
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <div class = 'container' style='background-color:rgb(213, 232, 247);'>
+    <center><img src='{% static "images/Home.jpg" %}'  alt='images/Home.jpg' style="border-radius: 8px; width:1000px; height:500px">
+    <center>
+        <ul class="list-unstyled" style>
+        <p class="h2 fs- text-center text-primary">The easiest way to manage your work anytime, anywhere..!</p>
+        <p class="h3  text-center">Simply register, create task and keep track of work</p>
+        <p class="h5 text-center"> Boost your Productivity free of cost</p>
+                
+        </ul>
+        <center><a href="{% url 'App_1'%}" class="btn btn-primary btn-lg active center" role="button" aria-pressed="true">Let's get started</a> </center>
+        
+
+    </div>
+
+{% endblock content %}
+
+
+{% comment %} 
+{% block content %}
+    <div class = 'container bg-light'>
+        <h1> Welcome to To-Do app </h1>
+        <br>
+        {% comment %} <img src='{% static"images/Home.jpg"%}' class="img-fluid" alt='images/Home.jpg'> {% endcomment %}
+    
+        {% comment %} <ul class="list-unstyled">
+
+           
+           
+            {% comment %} <p class="fs-3">Manage your work anytime, anywhere</p>
+            <p class="fs-4">Manage your work anytime, anywhere</p>
+            <p class="fs-4">Manage your work anytime, anywhere</p>
+            
+        </ul> {% endcomment %}
+        {% comment %} <a href="{% url 'App_1'%}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Let's get started</a>
+    </div>
+{% endblock content %}
+ {% endcomment %}

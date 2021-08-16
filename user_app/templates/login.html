@@ -1,0 +1,46 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+ {% block title %}
+        <title>  Login page </title>
+        <style> 
+        hr { color:black }
+        </style>
+ {% endblock title %}
+ {% block content %}
+ 
+    <div class = 'container' >
+    <h2> Welcome to the Login page..</h2>
+    <br>
+     
+    
+    {% if messages%}
+        {% for messages in messages %}
+            <div class="alert alert-primary alert-dismissible fade show"  role="alert">
+                {{messages}} 
+                
+                <button type="button"  class="close " data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                
+            </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+        <form method= "POST" class = 'mt-5 col-md-6'>
+            {% csrf_token %}
+
+            {{form|crispy}}
+        <button type="submit" class="btn btn-primary mt-3">Login</button>
+        </form>
+        <hr class="col-md-6 ">
+        If you haven't Register yet, register here
+        <br>
+        <button type="submit" class="btn btn-dark mt-3 text-light"> <a href= "{% url 'register'%}"> Register as new user </a></button>
+
+    
+    </div>
+    
+
+
+{% endblock content %}

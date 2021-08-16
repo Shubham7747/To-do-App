@@ -1,0 +1,9 @@
+h1{
+    color: blue;
+    background-color: black;
+    font: 15px Arial, sans-serif;
+}
+
+img {
+    border-radius: 8px;
+  }

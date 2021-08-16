@@ -1,0 +1,97 @@
+
+{% extends 'base.html'%}
+
+{% block title %}
+<title> This is App_1 page </title>
+{% endblock title %}
+
+{% block content %}
+<div class='container'>
+    <br>
+    {% if messages%}
+        {% for messages in messages %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% comment %} <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong> Well done !</strong> You should check in on some of those fields below.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> {% endcomment %}
+        {% endfor %}
+    {% endif %}
+
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" name="task" placeholder="Enter Task" aria-label="Task">
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-primary"> Submit </button>
+            </div>
+        </div>
+    </form>
+    <br>
+
+
+    <table class="table table-bordered border-dark" style = "text-align:center">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col"> Done </th>
+                <th scope="col">Edit </th>
+                <th scope="col"> Delete </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {%for obj in all%}
+                {% if obj.done%}
+                    <tr class="table-info table-bordered border-dark">
+                        <th scope="row"> {{obj.task}}</th>
+                        <td><a  href="{% url 'done_task' obj.id %}" class="btn btn-success btn-md active mx-3" role="button" aria-pressed="true">Done</a></td>
+                        <td><a  href="{% url 'edit_task' obj.id %}" class="btn btn-warning btn-md active mx-3" role="button" aria-pressed="true">Edit</a></td>
+                        <td><a  href="{% url 'delete_task' obj.id %}" class="btn btn-danger btn-md active mx-3" role="button" aria-pressed="true">Delete</a></td>
+                    </tr>
+                {%else%}    
+                    <tr>
+                        <th scope="row">{{obj.task}}</th>
+                        <td><a  href="{% url 'done_task' obj.id %}" class="btn btn-success btn-md active mx-3" role="button" aria-pressed="true">Pending</a></td>
+                        <td><a  href="{% url 'edit_task' obj.id %}" class="btn btn-warning btn-md active mx-3" role="button" aria-pressed="true">Edit</a></td>
+                        <td><a  href="{% url 'delete_task' obj.id %}" class="btn btn-danger btn-md active mx-3" role="button" aria-pressed="true">Delete</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+    <br>
+
+    {% comment %} <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item "><a class="page-link" href="?pg=1" ><<</a></li>
+            <li class="page-item"><a class="page-link" href="?pg= {{all_tasks.previous_page_number}}"> Previous</a></li>
+            <li class="page-item"><a class="page-link" href="?pg={{ all_tasks.number}}"> {{ all_tasks.number}} </a></li>
+            <li class="page-item"><a class="page-link" href="?pg={{ all_tasks.next_page_number}}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?pg={{ all_tasks.num_pages}}">>></a> </li>
+        </ul>
+    </nav> {% endcomment %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item"><a class="page-link" href="#">{{ all_tasks.previous_page_number }}</a></li>
+            <li class="page-item"><a class="page-link" href="#">{{ all_tasks.number }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page= {{ all_tasks.next_page_number }}"> {{ all_tasks.next_page_number }} </a></li>
+            <li class="page-item"><a class="page-link" href="?page= {{all_tasks.num_pages}}">Last</a></li>
+        </ul>
+    </nav>
+
+</div>
+{% endblock content %}
